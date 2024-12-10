@@ -15,7 +15,7 @@ const Banner1 = () => {
           <p>Personal Account</p>
         </div>
         <div className="ml-4">
-          <img src={person} alt='person' className={`rounded-full ${30} border-[8px] border-[#19918F]`} />
+          <img src={person} alt='person' className={`rounded-full w-[80px] h-[80px] border-[8px] border-[#19918F]`} />
         </div>
       </div>
     </div>

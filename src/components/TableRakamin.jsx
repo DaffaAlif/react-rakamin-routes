@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Search} from "antd";
 
 
 const columns = [
@@ -71,6 +71,8 @@ const TableRakamin = () => (
     
 
   </div>
+  <Search addonBefore="https://" placeholder="input search text" allowClear />
+
     <Table
       columns={columns}
       dataSource={data}

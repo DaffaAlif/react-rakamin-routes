@@ -17,6 +17,9 @@ const Navbar = () => {
         <NavLink to="/topup" end>
           Top Up
         </NavLink>
+        <NavLink to="#" end>
+          Sign Out
+        </NavLink>
       </div>
     </div>
   );
