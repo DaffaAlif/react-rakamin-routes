@@ -1,20 +1,22 @@
 import React from "react";
 import { Plus, Send } from "lucide-react";
+import { FormatRupiah } from "@arismun/format-rupiah";
 
-const Banner = () => {
+const Fund = ({balance}) => {
+  
   return (
     <div>
       <div class="grid grid-cols-4 gap-4">
         <div>
           <div className="bg-[#19918F] rounded-lg p-10 text-white w-[320px] h-[200px]">
             <p className="font-thin text-[20px]">Account No.</p>
-            <p className="font-bold text-[35px] mt-4">100899</p>
+            <p className="font-bold text-[35px] mt-4">{balance?.accountNo}</p>
           </div>
         </div>
         <div class="col-span-2">
           <div className=" rounded p-10 text-gray-500  h-[200px]">
             <p className="font-thin text-[20px]">Balance</p>
-            <p className="font-bold text-[35px] mt-4">Rp. 10.000.000,00</p>
+            <p className="font-bold text-[35px] mt-4"><FormatRupiah value={balance?.amount.toFixed(2)}/></p>
           </div>
         </div>
         <div>
@@ -32,4 +34,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default Fund;
