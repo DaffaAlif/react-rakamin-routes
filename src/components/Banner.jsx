@@ -20,10 +20,10 @@ const Banner = () => {
         <div>
           <div className=" rounded p-10 text-gray-500  h-[200px] flex justify-center items-center gap-4">
             <button className="bg-[#19918F] rounded-md p-6 ">
-              <Plus color="white" size={40}/>
+              <Plus color="white" size={30}/>
             </button>
             <button className="bg-[#19918F] rounded-md p-6  ">
-              <Send color="white" size={40} />
+              <Send color="white" size={30} />
             </button>
           </div>
         </div>
