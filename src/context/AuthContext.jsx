@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { redirect } from "react-router";
 
 const AuthContext = createContext();
 
@@ -12,8 +11,8 @@ const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const login = (username) => {
-    if (username === "admin") {
+  const login = (username, password) => {
+    if (username == "admin" && password == "123") {
       localStorage.setItem("auth", true);
       setIsLogin(true);
       navigate("/");

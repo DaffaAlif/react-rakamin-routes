@@ -13,7 +13,7 @@ const Login = () => {
   const { login } = useAuth();
 
   const onSubmitForm = () => {
-    login(email);
+    login(email, password);
    
   };
 
