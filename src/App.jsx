@@ -4,52 +4,72 @@ import TableRakamin from "./components/TableRakamin";
 import MainLayout from "./layout/MainLayout";
 import { useState, useEffect } from "react";
 import { Loader, AlertCircle, CheckCircle, Circle } from "lucide-react";
+import { useNavigate } from "react-router";
+import getCookie from "./utils/getCookie";
+import { Base64 } from "js-base64";
 
 function App() {
-  const [balance, setBalance] = useState({});
+  const [userData, setUserData] = useState({});
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [balanceShow, setBalanceShow] = useState(false);
+  const navigate = useNavigate()
+
+
 
   useEffect(() => {
-    const fetchBalanceData = async () => {
+    const fetchCurrentUser = async () => {
+      const token = localStorage.getItem('auth')
+      console.log(token)
+      
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/balance");
+        const response = await fetch("http://localhost:3000/users/current", {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch!");
         }
         const data = await response.json();
-        setBalance(data);
+        setUserData(data);
         setError(null);
       } catch (error) {
         setError(error.message);
+        navigate('/login')
       } finally {
         setLoading(false);
       }
     };
-    fetchBalanceData();
+    fetchCurrentUser();
   }, []);
 
-  useEffect(() => {
-    const fetchTransactionsData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("http://localhost:3000/transactions");
-        if (!response.ok) {
-          throw new Error("Failed to fetch!");
-        }
-        const data = await response.json();
-        setTransactions(data);
-        setError(null);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTransactionsData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchTransactionsData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await fetch("http://localhost:3000/transactions");
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch!");
+  //       }
+  //       const data = await response.json();
+  //       setTransactions(data);
+  //       setError(null);
+  //     } catch (error) {
+  //       setError(error.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchTransactionsData();
+  // }, []);
+
+  const handleShowBalance = () => {
+    console.log("click");
+    setBalanceShow(!balanceShow);
+  };
 
   if (loading) {
     return (
@@ -74,10 +94,15 @@ function App() {
 
   return (
     <MainLayout>
+      {console.log(userData)}
       <div className="grid gap-12">
-        <Banner1 />
-        <Fund balance={balance}/>
-        <TableRakamin transactions={transactions}/>
+        <Banner1 userData={userData} />
+        <Fund
+          userData={userData}
+          handleShowBalance={handleShowBalance}
+          balanceShow={balanceShow}
+        />
+        {/* <TableRakamin transactions={transactions}/> */}
       </div>
     </MainLayout>
   );

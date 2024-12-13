@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../assets/Logo.png";
 import loginPic from "../assets/login-signup.png";
 import { Button, Image, Input } from "antd";
 import { useAuth } from "../context/AuthContext";
-import { redirect } from "react-router";
 import AuthLayout from "../layout/AuthLayout";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+ 
+
   const { login } = useAuth();
 
   const onSubmitForm = () => {
     login(email, password);
-   
   };
 
   return (
@@ -51,7 +52,7 @@ const Login = () => {
           </p>
         </div>
         <div className="w-2/3 flex justify-end">
-          <img src={loginPic} className="h-[100vh]"/>
+          <img src={loginPic} className="h-[100vh]" />
         </div>
       </div>
     </AuthLayout>

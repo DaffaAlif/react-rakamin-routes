@@ -11,22 +11,35 @@ const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const login = (username, password) => {
-    if (username == "admin" && password == "123") {
-      localStorage.setItem("auth", true);
-      setIsLogin(true);
+  const login = async (email, password) => {
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch!");
+      }
+
+      const result = await response.json();
+      localStorage.setItem("auth", result.token);
+
       navigate("/");
-      console.log("pencet login");
-      return true;
+      setIsLogin(true);
+    } catch (error) {
+      throw new Error(`Error : ${error}`);
     }
-    return false;
   };
 
   const logout = () => {
-      localStorage.setItem("auth", false);
-      setIsLogin(false);
-      navigate("/login");
- 
+    localStorage.setItem("auth", false);
+    setIsLogin(false);
+    navigate("/login");
   };
 
   const values = {

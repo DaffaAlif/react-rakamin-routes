@@ -12,6 +12,9 @@
   "dependencies": {
     "@arismun/format-rupiah": "^3.0.0",
     "antd": "^5.22.3",
+    "base-64": "^1.0.0",
+    "cookie-session": "^2.1.0",
+    "js-base64": "^3.7.7",
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
